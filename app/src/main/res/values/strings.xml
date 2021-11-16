@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PizzaTime2Admin</string>
+
+    <array name="tipos">
+        <item>Pizza</item>
+        <item>Bebida</item>
+    </array>
 </resources>

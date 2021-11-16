@@ -1,5 +1,6 @@
 package com.example.pizzatime2admin;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,12 @@ import com.example.pizzatime2admin.modelo.PizzaBebida;
 import java.util.ArrayList;
 
 public class PizzaBebidaAdapter extends RecyclerView.Adapter<PizzaBebidaAdapter.PizzaBebidaViewHolder> {
-    ArrayList<PizzaBebida> list;
+    private Context context;
+    private ArrayList<PizzaBebida> list;
     private View.OnClickListener onClickListener;
 
-    public PizzaBebidaAdapter(){
+    public PizzaBebidaAdapter(Context context){
+        this.context =  context;
         list = new ArrayList<>();
     }
 
@@ -50,6 +53,13 @@ public class PizzaBebidaAdapter extends RecyclerView.Adapter<PizzaBebidaAdapter.
         this.onClickListener = onClickListener;
     }
 
+    public void changeList(ArrayList<PizzaBebida> list){
+        this.list = null;
+        this.list = new ArrayList<>();
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
+
     public void addToList(ArrayList<PizzaBebida> list){
         this.list.addAll(list);
         notifyDataSetChanged();
@@ -68,6 +78,10 @@ public class PizzaBebidaAdapter extends RecyclerView.Adapter<PizzaBebidaAdapter.
     public void deleteItem(int pos){
         this.list.remove(pos);
         notifyItemRemoved(pos);
+    }
+
+    public ArrayList<PizzaBebida> getList() {
+        return list;
     }
 
     class PizzaBebidaViewHolder extends RecyclerView.ViewHolder{
