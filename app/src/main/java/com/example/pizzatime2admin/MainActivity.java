@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String PIZZABEBIDA = "pizzabebida";
     public static final String PIZZAINSERTAR = "pizzainsertar";
+    public static final String PIZZAACTUALIZAR = "pizzaactualizar";
+    public static final String BORRAR = "borrar";
     private Retrofit retrofit;
     private RecyclerView recyclerView;
     private PizzaBebidaAdapter pizzaBebidaAdapter;
@@ -61,7 +63,25 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-    //TODO actualizar borrar
+    ActivityResultLauncher<Intent> resultActualizarBorrar = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK){
+                        Intent datosResult = result.getData();
+
+                        Bundle bundle = datosResult.getBundleExtra(Intent.EXTRA_SUBJECT);
+                        PizzaBebida pb = bundle.getParcelable(PIZZAACTUALIZAR);
+                        if (bundle.getBoolean(BORRAR)){
+                            borrarDatos(pb.getId());
+                        } else {
+                            actualizarDatos(pb);
+                        }
+
+                    }
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
         Button btnChange = findViewById(R.id.btnChange_main);
 
-        btnChange.setText("Bebida"); //TODO
+        btnChange.setText(R.string.pizza);
 
         recyclerView = findViewById(R.id.recViewPizzaBebida_main);
 
@@ -87,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
         pizzaBebidaAdapter.setOnItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /* TODO
                 posSelected = recyclerView.getChildAdapterPosition((view));
                 PizzaBebida pb = pizzaBebidaAdapter.getList().get(posSelected);
 
@@ -97,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentActualizar = new Intent(MainActivity.this, ActualizarBorrar.class);
                 intentActualizar.putExtra(Intent.EXTRA_TEXT, bundle);
 
-                resultActualizarBorrar.launch(intentActualizar);*/
+                resultActualizarBorrar.launch(intentActualizar);
             }
         });
         recyclerView.setAdapter(pizzaBebidaAdapter);
@@ -115,11 +134,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (actualTipe == 0){
                     actualTipe = 1;
-                    btnChange.setText("Pizza"); //TODO
+                    btnChange.setText(R.string.bebida);
                     pizzaBebidaAdapter.changeList(bebidas);
                 } else {
                     actualTipe = 0;
-                    btnChange.setText("Bebida"); //TODO
+                    btnChange.setText(R.string.pizza);
                     pizzaBebidaAdapter.changeList(pizzas);
                 }
             }
@@ -171,8 +190,8 @@ public class MainActivity extends AppCompatActivity {
                 PizzaBebida pb = response.body();
                 if (pb.getTipo() == 0) {
                     pizzas.add(pb);
-                    pizzaBebidaAdapter.addToList(pb);
                 }  else bebidas.add(pb);
+                pizzaBebidaAdapter.addToList(pb);
             }
 
             @Override
@@ -192,9 +211,10 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<PizzaBebida> call, Response<PizzaBebida> response) {
                 PizzaBebida pb = response.body();
                 if (pb.getTipo() == 0) {
-                    pizzas.add(pb);
-                    pizzaBebidaAdapter.addToList(pb);
-                }  else bebidas.add(pb);
+                    pizzas.set(pizzas.indexOf(pb), pb);
+                }  else bebidas.set(pizzas.indexOf(pb), pb); //TODO error
+
+                pizzaBebidaAdapter.updateItem(posSelected, pb);
             }
 
             @Override

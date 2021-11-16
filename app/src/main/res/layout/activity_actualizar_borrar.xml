@@ -22,7 +22,7 @@
         android:id="@+id/txtId_actborrar"
         style="@style/txtLable"
         android:layout_marginTop="24dp"
-        android:text="Precio: "
+        android:text="ID: "
         app:layout_constraintStart_toStartOf="@+id/imgLogo_main"
         app:layout_constraintTop_toBottomOf="@+id/imgLogo_main" />
 
@@ -31,6 +31,7 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:enabled="false"
         app:layout_constraintStart_toEndOf="@+id/txtId_actborrar"
         app:layout_constraintTop_toTopOf="@+id/txtId_actborrar" />
 

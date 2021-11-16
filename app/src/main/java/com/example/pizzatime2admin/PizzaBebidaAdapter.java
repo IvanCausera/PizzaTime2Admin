@@ -77,7 +77,7 @@ public class PizzaBebidaAdapter extends RecyclerView.Adapter<PizzaBebidaAdapter.
 
     public void deleteItem(int pos){
         this.list.remove(pos);
-        notifyItemRemoved(pos);
+        notifyDataSetChanged();
     }
 
     public ArrayList<PizzaBebida> getList() {
