@@ -24,6 +24,7 @@ import com.example.pizzatime2admin.modelo.PizzaBebida;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -90,8 +91,10 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab);
         Button btnChange = findViewById(R.id.btnChange_main);
+        TextView txtLabel = findViewById(R.id.txtLableList_main);
 
-        btnChange.setText(R.string.pizza);
+        btnChange.setText(R.string.ver_bebida);
+        txtLabel.setText(getString(R.string.pizza) + ":");
 
         recyclerView = findViewById(R.id.recViewPizzaBebida_main);
 
@@ -134,11 +137,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (actualTipe == 0){
                     actualTipe = 1;
-                    btnChange.setText(R.string.bebida);
+                    btnChange.setText(R.string.ver_pizza);
+                    txtLabel.setText(getString(R.string.bebida) + ":");
                     pizzaBebidaAdapter.changeList(bebidas);
                 } else {
                     actualTipe = 0;
-                    btnChange.setText(R.string.pizza);
+                    btnChange.setText(R.string.ver_bebida);
+                    txtLabel.setText(getString(R.string.pizza) + ":");
                     pizzaBebidaAdapter.changeList(pizzas);
                 }
             }
@@ -190,8 +195,11 @@ public class MainActivity extends AppCompatActivity {
                 PizzaBebida pb = response.body();
                 if (pb.getTipo() == 0) {
                     pizzas.add(pb);
-                }  else bebidas.add(pb);
-                pizzaBebidaAdapter.addToList(pb);
+                    if (actualTipe == 0) pizzaBebidaAdapter.addToList(pb);
+                }  else {
+                    bebidas.add(pb);
+                    if (actualTipe == 1) pizzaBebidaAdapter.addToList(pb);
+                }
             }
 
             @Override
@@ -211,12 +219,25 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<PizzaBebida> call, Response<PizzaBebida> response) {
                 PizzaBebida pb = response.body();
                 if (pb.getTipo() == 0) {
-                    pizzas.set(pizzas.indexOf(pb), pb);
-                }  else bebidas.set(pizzas.indexOf(pb), pb); //TODO error
-
-                pizzaBebidaAdapter.updateItem(posSelected, pb);
+                    if (actualTipe == 0) { //Update pizza
+                        pizzas.set(posSelected, pb);
+                        pizzaBebidaAdapter.updateItem(posSelected, pb);
+                    } else { //Update bebida to pizza
+                        bebidas.remove(posSelected);
+                        pizzaBebidaAdapter.deleteItem(posSelected);
+                        pizzas.add(pb);
+                    }
+                }  else {
+                    if (actualTipe == 1) { //Update bebida
+                        bebidas.set(posSelected, pb);
+                        pizzaBebidaAdapter.updateItem(posSelected, pb);
+                    } else{ //Update pizza to bebida
+                        pizzas.remove(posSelected);
+                        pizzaBebidaAdapter.deleteItem(posSelected);
+                        bebidas.add(pb);
+                    }
+                }
             }
-
             @Override
             public void onFailure(Call<PizzaBebida> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Fallo en la respuesta", Toast.LENGTH_LONG).show();
@@ -231,14 +252,14 @@ public class MainActivity extends AppCompatActivity {
         pizzaBebida.enqueue(new Callback<PizzaBebida>() {
             @Override
             public void onResponse(Call<PizzaBebida> call, Response<PizzaBebida> response) {
-                PizzaBebida pb = response.body();
-                if (pb.getTipo() == 0) {
-                    pizzas.remove(pb);
-                }  else bebidas.remove(pb);
 
+                if (actualTipe == 0) {
+                    pizzas.remove(posSelected);
+                }  else {
+                    bebidas.remove(posSelected);
+                }
                 pizzaBebidaAdapter.deleteItem(posSelected);
             }
-
             @Override
             public void onFailure(Call<PizzaBebida> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Fallo en la respuesta", Toast.LENGTH_LONG).show();

@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public class PizzaBebida implements Parcelable {
     @SerializedName("id")
     @Expose
@@ -95,5 +97,23 @@ public class PizzaBebida implements Parcelable {
         parcel.writeString(nombre);
         parcel.writeDouble(precio);
         parcel.writeInt(tipo);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PizzaBebida that = (PizzaBebida) o;
+        return id == that.id;
+    }
+
+    @Override
+    public String toString() {
+        return "PizzaBebida{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", precio=" + precio +
+                ", tipo=" + tipo +
+                '}';
     }
 }

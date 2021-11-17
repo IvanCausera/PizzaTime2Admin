@@ -28,14 +28,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgLogo_main" />
 
+    <TextView
+        android:id="@+id/txtLableList_main"
+        style="@style/txtLable"
+        android:textSize="26sp"
+        android:layout_marginTop="16dp"
+        android:text="Nombre: "
+        app:layout_constraintStart_toStartOf="@+id/recViewPizzaBebida_main"
+        app:layout_constraintTop_toBottomOf="@+id/btnChange_main" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recViewPizzaBebida_main"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="420dp"
         app:layout_constraintEnd_toEndOf="@+id/btnChange_main"
         app:layout_constraintStart_toStartOf="@+id/btnChange_main"
-        app:layout_constraintTop_toBottomOf="@+id/btnChange_main" />
+        app:layout_constraintTop_toBottomOf="@+id/txtLableList_main" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
