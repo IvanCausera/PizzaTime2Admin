@@ -1,18 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">PizzaTime2Admin</string>
     <string name="pizza">Pizza</string>
     <string name="bebida">Bebida</string>
     <string name="ver_pizza">Ver Pizza</string>
     <string name="ver_bebida">Ver Bebida</string>
-    <string name="nombre_">Nombre:</string>
-    <string name="precio_">Precio:</string>
-    <string name="insertar">Insertar</string>
     <string name="tipo_">Tipo:</string>
-    <string name="actualizar">Actualizar</string>
-    <string name="borrar">Borrar</string>
 
     <array name="tipos">
         <item>Pizza</item>
         <item>Bebida</item>
     </array>
+    <string name="nombre_">Nombre:</string>
+    <string name="precio_">Precio:</string>
+    <string name="insertar">Insertar</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="borrar">Borrar</string>
 </resources>

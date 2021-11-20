@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pizza">Pizza</string>
+    <string name="bebida">Drink</string>
+    <string name="ver_pizza">View Pizza</string>
+    <string name="ver_bebida">View Drink</string>
+
+    <array name="tipos">
+        <item>Pizza</item>
+        <item>Drink</item>
+    </array>
+    <string name="nombre_">Name:</string>
+    <string name="precio_">Price:</string>
+    <string name="insertar">Insert</string>
+    <string name="tipo_">Type:</string>
+    <string name="actualizar">Update</string>
+    <string name="borrar">Delete</string>
+</resources>

@@ -39,7 +39,7 @@
         android:id="@+id/txtNombre_actborrar"
         style="@style/txtLable"
         android:layout_marginTop="24dp"
-        android:text="Nombre: "
+        android:text="@string/nombre_"
         app:layout_constraintStart_toStartOf="@+id/txtId_actborrar"
         app:layout_constraintTop_toBottomOf="@+id/txtId_actborrar" />
 
@@ -55,7 +55,7 @@
         android:id="@+id/txtPrecio_actborrar"
         style="@style/txtLable"
         android:layout_marginTop="24dp"
-        android:text="Precio: "
+        android:text="@string/precio_"
         app:layout_constraintStart_toStartOf="@+id/txtNombre_actborrar"
         app:layout_constraintTop_toBottomOf="@+id/txtNombre_actborrar" />
 
@@ -72,7 +72,7 @@
         android:id="@+id/txtTipo_actborrar"
         style="@style/txtLable"
         android:layout_marginTop="24dp"
-        android:text="Tipo: "
+        android:text="@string/tipo_"
         app:layout_constraintStart_toStartOf="@+id/txtPrecio_actborrar"
         app:layout_constraintTop_toBottomOf="@+id/txtPrecio_actborrar" />
 
@@ -90,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Actualizar"
+        android:text="@string/actualizar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +100,7 @@
         android:id="@+id/btnBorrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Borrar"
+        android:text="@string/borrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnActualizar"
         app:layout_constraintTop_toTopOf="@+id/btnActualizar" />

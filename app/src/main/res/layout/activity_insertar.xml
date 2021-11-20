@@ -22,7 +22,7 @@
         android:id="@+id/txtNombre_insertar"
         style="@style/txtLable"
         android:layout_marginTop="24dp"
-        android:text="Nombre: "
+        android:text="@string/nombre_"
         app:layout_constraintStart_toStartOf="@+id/imgLogo_insertar"
         app:layout_constraintTop_toBottomOf="@+id/imgLogo_insertar" />
 
@@ -38,7 +38,7 @@
         android:id="@+id/txtPrecio_insertar"
         style="@style/txtLable"
         android:layout_marginTop="24dp"
-        android:text="Precio: "
+        android:text="@string/precio_"
         app:layout_constraintStart_toStartOf="@+id/txtNombre_insertar"
         app:layout_constraintTop_toBottomOf="@+id/txtNombre_insertar" />
 
@@ -55,7 +55,7 @@
         android:id="@+id/txtTipo_insertar"
         style="@style/txtLable"
         android:layout_marginTop="24dp"
-        android:text="Tipo: "
+        android:text="@string/tipo_"
         app:layout_constraintStart_toStartOf="@+id/txtPrecio_insertar"
         app:layout_constraintTop_toBottomOf="@+id/txtPrecio_insertar" />
 
@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Insertar"
+        android:text="@string/insertar"
         app:layout_constraintEnd_toEndOf="@+id/imgLogo_insertar"
         app:layout_constraintStart_toStartOf="@+id/imgLogo_insertar"
         app:layout_constraintTop_toBottomOf="@+id/txtTipo_insertar" />
